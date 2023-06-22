@@ -1,42 +1,26 @@
 package ru.netology.oop;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Game {
 
-    private ArrayList<Player> registeredPlayers;
-    private HashMap<String, Integer> registeredPlayersMap = new HashMap<>();
+    private HashMap<String, Integer> registeredPlayers;
 
     public Game() {
-        this.registeredPlayers = new ArrayList<>();
+        this.registeredPlayers = new HashMap<>();
     }
 
-    public ArrayList<Player> getRegisteredPlayers() {
+    public HashMap<String, Integer> getRegisteredPlayers() {
         return registeredPlayers;
     }
 
-    public HashMap<String, Integer> getRegisteredPlayersMap() {
-        return registeredPlayersMap;
-    }
-
     public void register(Player player) {
-        registeredPlayers.add(player);
-        registeredPlayersMap.put(player.getName(), player.getStrength());
-    }
-
-    public Player findByName(String name) {
-        for (Player player : registeredPlayers) {
-            if (player.getName().equals(name)) {
-                return player;
-            }
-        }
-        return null;
+        registeredPlayers.put(player.getName(), player.getStrength());
     }
 
     public int round(String playerName1, String playerName2) {
-        Integer activePlayer1Strength = registeredPlayersMap.get(playerName1);
-        Integer activePlayer2Strength = registeredPlayersMap.get(playerName2);
+        Integer activePlayer1Strength = registeredPlayers.get(playerName1);
+        Integer activePlayer2Strength = registeredPlayers.get(playerName2);
         if (activePlayer1Strength == null) {
             throw new NotRegisteredException("Player named " + playerName1 + " is not registered!");
         } else if (activePlayer2Strength == null) {
