@@ -1,44 +1,35 @@
 package ru.netology.oop;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
 
-    private ArrayList<Player> registeredPlayers;
+    private HashMap<String, Integer> registeredPlayers;
 
     public Game() {
-        this.registeredPlayers = new ArrayList<>();
+        this.registeredPlayers = new HashMap<>();
     }
 
-    public ArrayList<Player> getRegisteredPlayers() {
+    public HashMap<String, Integer> getRegisteredPlayers() {
         return registeredPlayers;
     }
 
     public void register(Player player) {
-        registeredPlayers.add(player);
-    }
-
-    public Player findByName(String name) {
-        for (Player player : registeredPlayers) {
-            if (player.getName().equals(name)) {
-                return player;
-            }
-        }
-        return null;
+        registeredPlayers.put(player.getName(), player.getStrength());
     }
 
     public int round(String playerName1, String playerName2) {
-        Player activePlayer1 = findByName(playerName1);
-        Player activePlayer2 = findByName(playerName2);
-        if (activePlayer1 == null) {
+        Integer activePlayer1Strength = registeredPlayers.get(playerName1);
+        Integer activePlayer2Strength = registeredPlayers.get(playerName2);
+        if (activePlayer1Strength == null) {
             throw new NotRegisteredException("Player named " + playerName1 + " is not registered!");
-        } else if (activePlayer2 == null) {
+        } else if (activePlayer2Strength == null) {
             throw new NotRegisteredException("Player named " + playerName2 + " is not registered!");
         } else {
             // start game
-            if (activePlayer1.getStrength() > activePlayer2.getStrength()) {
+            if (activePlayer1Strength > activePlayer2Strength) {
                 return 1;
-            } else if (activePlayer2.getStrength() > activePlayer1.getStrength()) {
+            } else if (activePlayer2Strength > activePlayer1Strength) {
                 return 2;
             } else return 0;
         }

@@ -3,7 +3,7 @@ package ru.netology.oop;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameTest {
 
@@ -20,11 +20,10 @@ public class GameTest {
         Game testGame = new Game();
         testGame.register(player3);
 
-        ArrayList<Player> expected = new ArrayList<>();
-        expected.add(player3);
-        ArrayList<Player> actual = testGame.getRegisteredPlayers();
-
-        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+        HashMap<String, Integer> expected = new HashMap<>();
+        expected.put("Raiden", 50);
+        HashMap<String, Integer> actual = testGame.getRegisteredPlayers();
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -34,44 +33,44 @@ public class GameTest {
         testGame.register(player5);
         testGame.register(player7);
 
-        ArrayList<Player> expected = new ArrayList<>();
-        expected.add(player3);
-        expected.add(player5);
-        expected.add(player7);
-        ArrayList<Player> actual = testGame.getRegisteredPlayers();
+        HashMap<String, Integer> expected = new HashMap<String, Integer>();
+        expected.put("Raiden", 50);
+        expected.put("Johny Cage", 25);
+        expected.put("Sonya Blade", 25);
+        HashMap<String, Integer> actual = testGame.getRegisteredPlayers();
 
-        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testRegistrationNone() {
         Game testGame = new Game();
-        ArrayList<Player> expected = new ArrayList<>();
-        ArrayList<Player> actual = testGame.getRegisteredPlayers();
-
-        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
-    }
-
-    @Test
-    public void shouldFindByName() {
-        Game testGame = new Game();
-        testGame.register(player4);
-        Player expected = player4;
-        Player actual = testGame.findByName("Goro");
+        HashMap<String, Integer> expected = new HashMap<String, Integer>();
+        HashMap<String, Integer> actual = testGame.getRegisteredPlayers();
 
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void shouldNotFindByName() {
-        Game testGame = new Game();
-        testGame.register(player4);
-        Player expected = null;
-        Player actual = testGame.findByName("Unknown");
+//    @Test
+//    public void shouldFindByName() {
+//        Game testGame = new Game();
+//        testGame.register(player4);
+//        Player expected = player4;
+//        Player actual = testGame.findByName("Goro");
+//
+//        Assertions.assertEquals(expected, actual);
+//    }
 
-        Assertions.assertEquals(expected, actual);
-    }
-
+    //    @Test
+//    public void shouldNotFindByName() {
+//        Game testGame = new Game();
+//        testGame.register(player4);
+//        Player expected = null;
+//        Player actual = testGame.findByName("Unknown");
+//
+//        Assertions.assertEquals(expected, actual);
+//    }
+//
     @Test
     public void shouldWinFirstPlayer() {
         Game testGame = new Game();
